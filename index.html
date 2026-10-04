@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+<title>Collection partagée · Collectionception</title>
+<meta name="description" content="Ouvrez cette collection dans l'application Collectionception.">
+<style>
+/* Page du lien de partage : elle reçoit « …#code » et renvoie vers l'application.
+   Aucune ressource extérieure, aucun envoi : le code ne quitte pas le navigateur.
+   Couleurs et typographie : celles de l'application, en clair et en sombre. */
+:root {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --fg: #0F172A;
+  --fg-2: #475569;
+  --muted: #64748B;
+  --line: #E2E8F0;
+  --accent: #4F46E5;
+  --accent-fill: #5B5EF0;
+  --on-accent: #FFFFFF;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0F172A;
+    --surface: #1E293B;
+    --surface-2: #172033;
+    --fg: #F8FAFC;
+    --fg-2: #CBD5E1;
+    --muted: #94A3B8;
+    --line: #334155;
+    --accent: #A5B4FC;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { height: 100%; }
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.logo { width: 44px; height: 44px; flex: none; }
+section { display: flex; flex-direction: column; gap: 16px; }
+h1 { margin: 0; font-size: 26px; line-height: 1.2; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { margin: 0; font-size: 15px; font-weight: 600; color: var(--fg); }
+p { margin: 0; }
+.lead { color: var(--fg-2); }
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+.button:hover { filter: brightness(1.08); }
+.store { align-self: center; color: var(--accent); font-weight: 600; font-size: 15px; }
+.help {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--fg-2);
+  font-size: 15px;
+}
+.code-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.code {
+  flex: 1;
+  min-width: 0;
+  font: 600 18px/1.4 ui-monospace, "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  letter-spacing: 0.12em;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+.copy {
+  flex: none;
+  min-height: 48px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.copy:hover { border-color: var(--muted); }
+.status { min-height: 20px; font-size: 13px; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--accent-fill); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><linearGradient id="lg-top" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9EBFF"/></linearGradient><linearGradient id="lg-inner" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9DA0FA"/><stop offset="1" stop-color="#8083F5"/></linearGradient><linearGradient id="lg-left-d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B8DF8"/><stop offset="1" stop-color="#6D6FF2"/></linearGradient><linearGradient id="lg-left-v" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#8B8DF8"/><stop offset="1" stop-color="#6D6FF2"/></linearGradient><linearGradient id="lg-right" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#4A45E0"/></linearGradient></defs><rect width="64" height="64" rx="14.72" fill="#0B1020"/><polygon points="32,12.16 45.4,19.9 38.19,24.06 32,20.49 22.03,26.25 14.82,22.08" fill="url(#lg-top)"/><polygon points="32,20.49 22.03,26.25 22.03,30.21 32,24.46" fill="url(#lg-inner)"/><polygon points="32,20.49 38.19,24.06 38.19,28.03 32,24.46" fill="url(#lg-left-d)"/><polygon points="45.4,19.9 38.19,24.06 38.19,28.03 45.4,23.87" fill="url(#lg-right)"/><polygon points="22.03,36.17 32,41.92 45.4,34.18 41.97,32.2 32,37.95 25.47,34.18" fill="url(#lg-top)"/><polygon points="22.03,36.17 22.03,30.21 25.47,28.23 25.47,34.18" fill="url(#lg-inner)"/><polygon points="14.82,22.08 22.03,26.25 22.03,36.17 32,41.92 32,51.84 14.82,41.92" fill="url(#lg-left-v)"/><polygon points="32,41.92 45.4,34.18 45.4,44.1 32,51.84" fill="url(#lg-right)"/></svg>
+    <span>Collectionception</span>
+  </div>
+
+  <section id="ready" hidden>
+    <h1>Une collection vous attend</h1>
+    <p class="lead">On vous a partagé une collection. Elle s'ouvre dans l'application Collectionception, en lecture seule.</p>
+    <a class="button" id="open" href="#">Ouvrir dans Collectionception</a>
+    <a class="store" id="store" href="#" hidden>Installer l'application</a>
+
+    <div class="help">
+      <h2>Rien ne se passe&nbsp;?</h2>
+      <p>L'application n'est sans doute pas installée sur cet appareil. Sur le téléphone où elle se trouve, ouvrez l'onglet Profil, choisissez «&nbsp;Ouvrir un lien de partage&nbsp;» et collez ce code&nbsp;:</p>
+      <div class="code-row">
+        <span class="code" id="code"></span>
+        <button class="copy" type="button" id="copy">Copier</button>
+      </div>
+      <p class="status" id="copied" role="status"></p>
+    </div>
+  </section>
+
+  <section id="invalid" hidden>
+    <h1>Ce lien est incomplet</h1>
+    <p class="lead">Il manque le code de partage à la fin de l'adresse. Demandez à la personne de vous renvoyer son lien, ou le code à coller dans Collectionception&nbsp;: onglet Profil, puis «&nbsp;Ouvrir un lien de partage&nbsp;».</p>
+  </section>
+
+  <noscript>
+    <section>
+      <h1>Une collection vous attend</h1>
+      <p class="lead">Cette page a besoin de JavaScript pour lire le code de partage. Vous pouvez aussi le copier vous-même&nbsp;: c'est la suite de lettres et de chiffres placée après le «&nbsp;#&nbsp;» dans l'adresse. Dans Collectionception, ouvrez l'onglet Profil, puis «&nbsp;Ouvrir un lien de partage&nbsp;», et collez-la.</p>
+    </section>
+  </noscript>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  // Lien que l'application sait ouvrir. À garder identique à CloudConfig
+  // (lib/shared/services/cloud/cloud_config.dart) ; un test du dépôt le vérifie.
+  var APP_LINK = "collectionception://share/";
+  // Le code est l'identifiant Google Drive de la copie partagée : majuscules
+  // et minuscules comptent.
+  var CODE = /^[A-Za-z0-9_-]{20,100}$/;
+
+  // Adresse de la fiche Play Store, une fois l'application publiée.
+  // Vide : la page ne propose pas d'installation.
+  var STORE_URL = "";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Le code suit le « # » de l'adresse : il n'est donc jamais envoyé au serveur qui héberge la page.
+  function codeFromAddress() {
+    var raw = (location.hash || "").replace(/^#/, "");
+    try { raw = decodeURIComponent(raw); } catch (e) { /* adresse mal formée : le code sera refusé */ }
+    raw = raw.trim();
+    return CODE.test(raw) ? raw : null;
+  }
+
+  function render() {
+    var code = codeFromAddress();
+    $("ready").hidden = !code;
+    $("invalid").hidden = !!code;
+    if (!code) return;
+    $("open").setAttribute("href", APP_LINK + code);
+    $("code").textContent = code;
+    $("copied").textContent = "";
+  }
+
+  $("copy").addEventListener("click", function () {
+    var code = $("code").textContent;
+    function done() { $("copied").textContent = "Code copié."; }
+    // Presse-papiers indisponible : le code est sélectionné, prêt à être copié à la main.
+    function select() {
+      var range = document.createRange();
+      range.selectNodeContents($("code"));
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      $("copied").textContent = "Code sélectionné : copiez-le depuis le menu de votre navigateur.";
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, select);
+    else select();
+  });
+
+  // Depuis un navigateur Android, l'application s'ouvre d'elle-même, une fois par
+  // onglet. Si elle n'est pas installée, rien ne se passe et la page reste là.
+  // Les navigateurs intégrés à d'autres applications (« wv ») sont laissés de
+  // côté : certains affichent une erreur devant un lien qu'ils ne savent pas ouvrir.
+  function openOnce() {
+    var code = codeFromAddress();
+    var agent = navigator.userAgent || "";
+    if (!code || !/Android/i.test(agent) || /\bwv\b/.test(agent)) return;
+    try {
+      if (sessionStorage.getItem("opened") === code) return;
+      sessionStorage.setItem("opened", code);
+    } catch (e) { /* stockage indisponible : l'ouverture est tentée quand même */ }
+    setTimeout(function () { location.href = APP_LINK + code; }, 400);
+  }
+
+  if (/^https:\/\//.test(STORE_URL)) {
+    $("store").setAttribute("href", STORE_URL);
+    $("store").hidden = false;
+  }
+
+  window.addEventListener("hashchange", render);
+  render();
+  openOnce();
+})();
+</script>
+</body>
+</html>
